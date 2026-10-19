@@ -21,14 +21,19 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install .
+          python -m pip install --upgrade pip
+          pip install -e .
 
       - name: Download Novel
         run: |
-          novel-downloader "${{ github.event.inputs.novel_url }}"
+          python -m novel_downloader "${{ github.event.inputs.novel_url }}"
 
       - name: Upload Novel Result
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: downloaded-novel
-          path: ./*.txt # Hoặc định dạng file đầu ra
+          path: |
+            *.txt
+            *.epub
+            *.mobi
