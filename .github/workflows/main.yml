@@ -26,7 +26,7 @@ jobs:
 
       - name: Download Novel
         run: |
-          python -m novel_downloader "${{ github.event.inputs.novel_url }}"
+          python -m novel_downloader download "${{ github.event.inputs.novel_url }}"
 
       - name: Upload Novel Result
         uses: actions/upload-artifact@v4
@@ -37,3 +37,6 @@ jobs:
             *.txt
             *.epub
             *.mobi
+            *.json
+            downloads/
+            output/
